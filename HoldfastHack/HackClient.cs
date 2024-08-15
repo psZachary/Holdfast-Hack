@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using HoldfastGame;
-using uGameDB;
 using System.Reflection;
 
 namespace HoldfastHack
@@ -29,6 +28,8 @@ namespace HoldfastHack
             this.ObjectCacheUpdateTimer = 0;
             this.PlayerCacheUpdateTimer = 0;
             this.ConfigManager.RunSpeedScale = FindObjectOfType<CommonGlobalVariables>().CharacterRunSpeedScale;
+
+
 
         }
 
@@ -69,21 +70,18 @@ namespace HoldfastHack
                 if (globalVars)
                 {
                     globalVars.CharacterRunSpeedScale = this.ConfigManager.RunSpeedScale;
+                    
                 }
             });
-      
-            this.GameManager.Weapons.ForEach((weapon) =>
-            {
-                if (weapon)
-                {
-                    var firearmProperties = weapon.FirearmWeaponProperties;
-                    if (firearmProperties)
-                    {
-                        weapon.FirearmWeaponProperties.recoilForce = 0;
-                        weapon.FirearmWeaponProperties.shotMaximumHorizontalDeviationAngle = 0;
-                    }
-                }
-            });
+
+            //((ClientWeaponHolder)this.GameManager.LocalPlayer.weaponHolder).ExecuteMeleeWeaponStrike(MeleeStrikeType.MeleeStrikeHigh);
+            //(ClientWeaponHolder)this.GameManager.LocalPlayer.weaponHolder).ActiveWeaponData.IsLoaded = true;
+
+            //((ClientWeaponHolder)this.GameManager.LocalPlayer.weaponHolder).ShootActiveFirearm(false);
+            //((ClientWeaponHolder)this.GameManager.LocalPlayer.weaponHolder).lastFiredTime = Time.time + 1000f;
+            //((ClientWeaponHolder)this.GameManager.LocalPlayer.weaponHolder).SetWeapon(WeaponType.Rifle_Pattern1800Infantry);
+
+            //((ClientWeaponHolder)this.GameManager.LocalPlayer.weaponHolder).ExecuteMeleeWeaponStrike(MeleeStrikeType.MeleeStrikeHigh);
 
             
           
@@ -91,12 +89,13 @@ namespace HoldfastHack
 
         public void OnGUI()
         {
+      
             if (IsMenuOpen)
                 GUI.Window(0, new Rect(100, 100, 300, 400), OnWindow, "Holdfast Hack");
 
-            EspManager.DoEsp(Camera.current, GameManager.Players, GameManager.LocalPlayer, this.ConfigManager);
+            EspManager.DoEsp(Camera.main, GameManager.Players, GameManager.LocalPlayer, this.ConfigManager);
             // Maybe move to Update()? 
-            AimbotManager.DoAimbot(GameManager, Camera.current, ConfigManager, KeyCode.Mouse1);
+            AimbotManager.DoAimbot(GameManager, Camera.main, ConfigManager, KeyCode.Mouse1);
 
         }
         private void OnWindow(int id)
@@ -125,10 +124,10 @@ namespace HoldfastHack
                 if (this.GameManager.GameOptionsCollection != null)
                 {
                     this.GameManager.GameOptionsCollection.customPlayerName = StringGenerator.GenerateString(10);
-                    this.GameManager.GameOptionsCollection.useSteamName = false;
                 }
 
             }
+         
 
         }
     }

@@ -16,9 +16,9 @@ namespace HoldfastHack
             {
                 var player = playerList[i];
                 var playerTransform = player.transform;
-
                 if (playerTransform != null && player != null && localPlayer != null && localPlayer.roundPlayerInstance != null && localPlayer.roundPlayerInstance.PlayerStartData != null)
                 {
+
                     Vector2 position;
                     if (Projection.WorldToScreen(camera, playerTransform.position, out position) && player.Health > 0)
                     {

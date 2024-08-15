@@ -20,6 +20,7 @@ namespace HoldfastHack
                 {
                     screenPosition.x = w2sScreenPosition.x;
                     screenPosition.y = w2sScreenPosition.y;
+                    
                     return true;
                 }
             }

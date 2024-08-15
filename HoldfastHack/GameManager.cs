@@ -45,7 +45,7 @@ namespace HoldfastHack
         public void UpdatePlayerObjects()
         {
             Players = FindObjectsOfType<PlayerBase>().ToList();
-            LocalPlayer = FindObjectOfType<ClientPlayerBase>();
+            LocalPlayer = FindObjectOfType<ClientPlayerBaseOwner>();
         }
         public void UpdateCommonGlobals()
         {
